@@ -1,6 +1,6 @@
 # Projeto Sistema Clínica Odontológica
 ## Conheça Este Sistema de Gestão Completo para Dentistas
-### Conheça o projeto: https://sistema-clinica-odontologica.grupowebsystem.com.br/sistema/index.php
+### Conheça o projeto: https://sistema-clinica-odontologica.grupowebsystem.com.br/
 - HTML5
 - CSS3
 - Bootstrap
@@ -11,8 +11,8 @@
 - Rest API
 
 ### Dados de Acesso
-- Usuário: paciente@dentalhealth.com.br
-- Senha: 123
+- Usuário: contato@techsolutionspro.com.br
+- Senha: Tspro#2025
 
 ###Dashboard
 ![layout1-clinica-odontologica](https://github.com/user-attachments/assets/65c914e5-5135-400a-9fdf-5485c7310376)
