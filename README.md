@@ -1,6 +1,9 @@
 # Projeto Sistema Clínica Odontológica
 ## Conheça Este Sistema de Gestão Completo para Dentistas
 ### Conheça o projeto: https://sistema-clinica-odontologica.grupowebsystem.com.br/
+
+## Tecnologias
+
 - HTML5
 - CSS3
 - Bootstrap
@@ -37,4 +40,5 @@
 ![layout3-clinica-odontologica](https://github.com/user-attachments/assets/235e8684-4412-4889-9c04-0a1de6641952)
 
 ### O projeto Sistema para Clínicas Odontológicas foi desenvolvido com o objetivo de atender às necessidades específicas de pequenas e médias clínicas odontológicas que, em sua grande maioria, ainda realizam a gestão do consultório de forma manual ou com sistemas genéricos que não contemplam as particularidades da área.
+
 
