@@ -6,10 +6,10 @@
 - HTML5
 - CSS3
 - JavaScript
-- JQuery
 - PHP
 - MySQL
 - Rest API
+- Git
 
 ## Dados de Acesso
 - Usuário: contato@techsolutionspro.com.br
