@@ -1,6 +1,6 @@
 # Sistema Clínica Odontológica
 
-Nova fundação full-stack em Next.js e TypeScript para substituir gradualmente a aplicação PHP legada.
+Aplicação full-stack em Next.js e TypeScript. O legado PHP/MySQL foi integralmente removido do repositório; o histórico da migração está em [MIGRATION.md](MIGRATION.md) e a especificação dos fluxos ainda não portados em [docs/legado-php.md](docs/legado-php.md).
 
 ## Stack
 
@@ -12,8 +12,6 @@ Nova fundação full-stack em Next.js e TypeScript para substituir gradualmente 
 - Argon2 para hash de senhas e `jose` para sessões assinadas em cookie HTTP-only
 - Node Test Runner, ESLint e verificação estática do TypeScript
 - Docker Compose para o banco local e Dockerfile multi-stage para a aplicação
-
-Os arquivos PHP na raiz são mantidos temporariamente como referência da migração. Eles não são executados pelo Next.js.
 
 ## Pré-requisitos
 

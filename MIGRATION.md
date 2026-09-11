@@ -13,6 +13,7 @@
 - ESLint, TypeScript estrito e teste unitário inicial com o runner nativo do Node.js.
 - Pipeline de CI para geração do cliente, lint, tipos, testes e build.
 - Interface responsiva sem dependência dos assets ausentes do legado.
+- Remoção integral dos arquivos PHP do repositório em 11/09/2026. As regras de negócio ainda não portadas foram preservadas como especificação em `docs/legado-php.md`, e o código original permanece acessível pelo histórico do Git (commit `22b6a5a`).
 
 ## Correspondência da autenticação
 
