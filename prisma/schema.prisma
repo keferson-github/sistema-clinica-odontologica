@@ -1,0 +1,518 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Access {
+  id     Int     @id @default(autoincrement())
+  nome   String  @db.VarChar(50)
+  chave  String  @db.VarChar(50)
+  grupo  Int
+  pagina String? @db.VarChar(5)
+
+  @@map("acessos")
+}
+
+model Appointment {
+  id              Int      @id @default(autoincrement())
+  funcionario     Int
+  paciente        Int
+  data            DateTime @db.Date
+  hora            DateTime @db.Time(0)
+  obs             String?  @db.VarChar(100)
+  data_lanc       DateTime @db.Date
+  usuario         Int
+  status          String   @db.VarChar(30)
+  servico         Int
+  hash            String?  @db.VarChar(100)
+  pago            String?  @db.VarChar(5)
+  tipo_pagamento  String?  @db.VarChar(50)
+  valor           Decimal? @db.Decimal(8, 2)
+  convenio        Int?
+  retorno         String?  @db.VarChar(5)
+  status_cor      String?  @db.VarChar(50)
+  numero_convenio String?  @db.VarChar(100)
+  id_tratamento   Int?
+
+  @@map("agendamentos")
+}
+
+model Anamnesis {
+  id        Int     @id @default(autoincrement())
+  paciente  Int
+  item      Int
+  descricao String? @db.VarChar(255)
+  grupo     Int
+
+  @@map("anamnese")
+}
+
+model Note {
+  id           Int      @id @default(autoincrement())
+  titulo       String   @db.VarChar(250)
+  msg          String   @db.Text
+  usuario      Int
+  data         DateTime @db.Date
+  mostrar_home String   @db.VarChar(5)
+  privado      String   @db.VarChar(5)
+
+  @@map("anotacoes")
+}
+
+model FileRecord {
+  id        Int      @id @default(autoincrement())
+  nome      String?  @db.VarChar(50)
+  descricao String?  @db.VarChar(100)
+  arquivo   String?  @db.VarChar(100)
+  data_cad  DateTime @db.Date
+  registro  String?  @db.VarChar(50)
+  id_reg    Int
+  usuario   Int
+
+  @@map("arquivos")
+}
+
+model CashRegister {
+  id                 Int       @id @default(autoincrement())
+  operador           Int
+  data_abertura      DateTime  @db.Date
+  data_fechamento    DateTime? @db.Date
+  valor_abertura     Decimal   @db.Decimal(8, 2)
+  valor_fechamento   Decimal?  @db.Decimal(8, 2)
+  quebra             Decimal?  @db.Decimal(8, 2)
+  usuario_abertura   Int
+  usuario_fechamento Int?
+  obs                String?   @db.VarChar(255)
+  sangrias           Decimal?  @db.Decimal(8, 2)
+
+  @@map("caixas")
+}
+
+model JobTitle {
+  id   Int    @id @default(autoincrement())
+  nome String @db.VarChar(50)
+
+  @@map("cargos")
+}
+
+model Patient {
+  id               Int       @id @default(autoincrement())
+  nome             String    @db.VarChar(50)
+  cpf              String?   @db.VarChar(25)
+  telefone         String?   @db.VarChar(20)
+  email            String?   @db.VarChar(50)
+  endereco         String?   @db.VarChar(100)
+  numero           String?   @db.VarChar(10)
+  bairro           String?   @db.VarChar(50)
+  cidade           String?   @db.VarChar(50)
+  estado           String?   @db.VarChar(50)
+  cep              String?   @db.VarChar(20)
+  tipo_pessoa      String?   @db.VarChar(15)
+  data_cad         DateTime  @db.Date
+  data_nasc        DateTime? @db.Date
+  usuario          Int?
+  complemento      String?   @db.VarChar(100)
+  tipo_sanguineo   String?   @db.VarChar(30)
+  nome_responsavel String?   @db.VarChar(50)
+  cpf_responsavel  String?   @db.VarChar(50)
+  convenio         Int?
+  sexo             String?   @db.VarChar(25)
+  profissao        String?   @db.VarChar(50)
+  estado_civil     String?   @db.VarChar(25)
+  telefone2        String?   @db.VarChar(20)
+  senha            String?   @db.VarChar(100)
+  obs              String?   @db.VarChar(500)
+
+  @@map("clientes")
+}
+
+model AppConfig {
+  clinicName           String?  @map("nome") @db.VarChar(50)
+  email                String?  @db.VarChar(50)
+  phone                String?  @map("telefone") @db.VarChar(20)
+  address              String?  @map("endereco") @db.VarChar(100)
+  instagram            String?  @db.VarChar(100)
+  logoUrl              String?  @map("logo") @db.VarChar(100)
+  icone                String?  @db.VarChar(100)
+  logo_rel             String?  @db.VarChar(100)
+  id                   Int      @id @default(autoincrement())
+  active               String?  @map("ativo") @db.VarChar(5)
+  lateFeePercent       Decimal? @map("multa_atraso") @db.Decimal(8, 2)
+  monthlyInterestPct   Decimal? @map("juros_atraso") @db.Decimal(8, 2)
+  marca_dagua          String?  @db.VarChar(5)
+  assinatura_recibo    String?  @db.VarChar(5)
+  impressao_automatica String?  @db.VarChar(5)
+  document             String?  @map("cnpj") @db.VarChar(25)
+  entrar_automatico    String?  @db.VarChar(5)
+  mostrar_preloader    String?  @db.VarChar(5)
+  ocultar_mobile       String?  @db.VarChar(5)
+  api_whatsapp         String?  @db.VarChar(25)
+  token_whatsapp       String?  @db.VarChar(70)
+  instancia_whatsapp   String?  @db.VarChar(70)
+  alterar_acessos      String?  @db.VarChar(5)
+  dados_pagamento      String?  @db.VarChar(100)
+  abertura_caixa       String?  @db.VarChar(5)
+  confirmationHours    Int?     @map("horas_confirmacao")
+
+  @@map("config")
+}
+
+model InsurancePlan {
+  id       Int     @id @default(autoincrement())
+  nome     String  @db.VarChar(50)
+  comissao Int?
+  telefone String? @db.VarChar(20)
+
+  @@map("convenios")
+}
+
+model WorkingDay {
+  id            Int       @id @default(autoincrement())
+  dia           String    @db.VarChar(25)
+  funcionario   Int
+  inicio        DateTime  @db.Time(0)
+  final         DateTime  @db.Time(0)
+  inicio_almoco DateTime? @db.Time(0)
+  final_almoco  DateTime? @db.Time(0)
+  data          DateTime? @db.Date
+
+  @@map("dias")
+}
+
+model PaymentMethod {
+  id   Int    @id @default(autoincrement())
+  nome String @db.VarChar(50)
+  taxa Int?
+
+  @@map("formas_pgto")
+}
+
+model Supplier {
+  id          Int      @id @default(autoincrement())
+  nome        String   @db.VarChar(50)
+  telefone    String   @db.VarChar(50)
+  email       String?  @db.VarChar(50)
+  endereco    String?  @db.VarChar(100)
+  pix         String?  @db.VarChar(50)
+  data        DateTime @db.Date
+  numero      String?  @db.VarChar(10)
+  bairro      String?  @db.VarChar(50)
+  cidade      String?  @db.VarChar(50)
+  estado      String?  @db.VarChar(50)
+  cep         String?  @db.VarChar(20)
+  cnpj        String?  @db.VarChar(20)
+  complemento String?  @db.VarChar(255)
+  tipo_chave  String?  @db.VarChar(100)
+  usuario     Int?
+
+  @@map("fornecedores")
+}
+
+model Frequency {
+  id         Int    @id @default(autoincrement())
+  frequencia String @db.VarChar(25)
+  dias       Int
+
+  @@map("frequencias")
+}
+
+model ProfessionalProcedure {
+  id           Int @id @default(autoincrement())
+  funcionario  Int
+  procedimento Int
+
+  @@map("func_proc")
+}
+
+model AccessGroup {
+  id   Int    @id @default(autoincrement())
+  nome String @db.VarChar(25)
+
+  @@map("grupo_acessos")
+}
+
+model AnamnesisGroup {
+  id        Int     @id @default(autoincrement())
+  nome      String  @db.VarChar(255)
+  descricao String? @db.VarChar(2000)
+
+  @@map("grupo_ana")
+}
+
+model PatientHistory {
+  id               Int      @id @default(autoincrement())
+  paciente         Int
+  descricao        String   @db.VarChar(2000)
+  data             DateTime @db.Date
+  consulta         Int
+  funcionario      Int
+  nome_funcionario String?  @db.VarChar(50)
+
+  @@map("historico_paciente")
+}
+
+model AppointmentTime {
+  id            Int      @id @default(autoincrement())
+  agendamento   Int
+  horario       DateTime @db.Time(0)
+  data          DateTime @db.Date
+  funcionario   Int
+  id_tratamento Int?
+
+  @@map("horarios_agd")
+}
+
+model AnamnesisItem {
+  id        Int     @id @default(autoincrement())
+  grupo     Int
+  nome      String  @db.VarChar(255)
+  descricao String? @db.VarChar(1000)
+
+  @@map("itens_ana")
+}
+
+model OdontogramItem {
+  id          Int      @id @default(autoincrement())
+  odontograma Int
+  paciente    Int
+  data        DateTime @db.Date
+  dente       Int
+  acao        String?  @db.VarChar(50)
+  descricao   String?  @db.VarChar(100)
+  obs         String?  @db.VarChar(255)
+  funcionario Int
+  deciduo     String?  @db.VarChar(5)
+
+  @@map("itens_odo")
+}
+
+model BudgetItem {
+  id           Int     @id @default(autoincrement())
+  produto      Int
+  valor        Decimal @db.Decimal(8, 2)
+  quantidade   Int
+  total        Decimal @db.Decimal(8, 2)
+  id_orcamento Int
+  funcionario  Int
+  descricao    String? @db.VarChar(255)
+
+  @@map("itens_orc")
+}
+
+model Odontogram {
+  id          Int      @id @default(autoincrement())
+  paciente    Int
+  data        DateTime @db.Date
+  descricao   String?  @db.VarChar(100)
+  evolutivo   String?  @db.VarChar(5)
+  funcionario Int?
+
+  @@map("odontograma")
+}
+
+model Budget {
+  id             Int       @id @default(autoincrement())
+  cliente        Int
+  data           DateTime  @db.Date
+  dias_validade  Int
+  valor          Decimal   @db.Decimal(10, 2)
+  desconto       Decimal?  @db.Decimal(10, 2)
+  tipo_desconto  String?   @db.VarChar(25)
+  subtotal       Decimal   @db.Decimal(10, 2)
+  obs            String?   @db.VarChar(255)
+  status         String?   @db.VarChar(25)
+  usuario        Int
+  forma_pgto     Int?
+  hora           DateTime? @db.Time(0)
+  tipo           String?   @db.VarChar(25)
+  data_aprovacao DateTime? @db.Date
+  odontograma    Int?
+
+  @@map("orcamentos")
+}
+
+model AccountPayable {
+  id                Int       @id @default(autoincrement())
+  descricao         String?   @db.VarChar(100)
+  fornecedor        Int
+  funcionario       Int
+  valor             Decimal   @db.Decimal(8, 2)
+  vencimento        DateTime  @db.Date
+  data_pgto         DateTime? @db.Date
+  data_lanc         DateTime  @db.Date
+  forma_pgto        Int
+  frequencia        Int
+  obs               String?   @db.VarChar(100)
+  arquivo           String?   @db.VarChar(100)
+  referencia        String?   @db.VarChar(30)
+  id_ref            Int?
+  multa             Decimal?  @db.Decimal(8, 2)
+  juros             Decimal?  @db.Decimal(8, 2)
+  desconto          Decimal?  @db.Decimal(8, 2)
+  taxa              Decimal?  @db.Decimal(8, 2)
+  subtotal          Decimal?  @db.Decimal(8, 2)
+  usuario_lanc      Int
+  usuario_pgto      Int
+  pago              String?   @db.VarChar(5)
+  residuo           String?   @db.VarChar(5)
+  hora              DateTime? @db.Time(0)
+  hash              String?   @db.VarChar(100)
+  caixa             Int?
+  quant_recorrencia Int?
+  recorrencia_inf   String?   @db.VarChar(5)
+  id_recorrencia    Int?
+
+  @@map("pagar")
+}
+
+model Procedure {
+  id       Int     @id @default(autoincrement())
+  nome     String  @db.VarChar(100)
+  valor    Decimal @db.Decimal(8, 2)
+  tempo    Int
+  ativo    String  @db.VarChar(5)
+  exame    String? @db.VarChar(5)
+  convenio String? @db.VarChar(5)
+  preparo  String? @db.VarChar(255)
+
+  @@map("procedimentos")
+}
+
+model XRay {
+  id           Int       @id @default(autoincrement())
+  paciente     Int?
+  dentista     Int?
+  descricao    String?   @db.VarChar(1000)
+  data         DateTime? @db.Date
+  clinica      String?   @db.VarChar(100)
+  procedimento String?   @db.VarChar(100)
+
+  @@map("raiox")
+}
+
+model AccountReceivable {
+  id                Int       @id @default(autoincrement())
+  descricao         String?   @db.VarChar(100)
+  cliente           Int
+  valor             Decimal   @db.Decimal(8, 2)
+  vencimento        DateTime  @db.Date
+  data_pgto         DateTime? @db.Date
+  data_lanc         DateTime  @db.Date
+  forma_pgto        Int
+  frequencia        Int
+  obs               String?   @db.VarChar(100)
+  arquivo           String?   @db.VarChar(100)
+  referencia        String?   @db.VarChar(30)
+  id_ref            Int?
+  multa             Decimal?  @db.Decimal(8, 2)
+  juros             Decimal?  @db.Decimal(8, 2)
+  desconto          Decimal?  @db.Decimal(8, 2)
+  taxa              Decimal?  @db.Decimal(8, 2)
+  subtotal          Decimal?  @db.Decimal(8, 2)
+  usuario_lanc      Int
+  usuario_pgto      Int
+  pago              String?   @db.VarChar(5)
+  residuo           String?   @db.VarChar(5)
+  hora              DateTime? @db.Time(0)
+  hash              String?   @db.VarChar(100)
+  caixa             Int?
+  tipo_chave        String?   @db.VarChar(50)
+  acessar_painel    String    @db.VarChar(5)
+  quant_recorrencia Int?
+  id_recorrencia    Int?
+  convenio          Int?
+
+  @@map("receber")
+}
+
+model CashWithdrawal {
+  id      Int      @id @default(autoincrement())
+  usuario Int
+  valor   Decimal  @db.Decimal(8, 2)
+  data    DateTime @db.Date
+  hora    DateTime @db.Time(0)
+  caixa   Int
+
+  @@map("sangrias")
+}
+
+model Task {
+  id            Int       @id @default(autoincrement())
+  usuario       Int
+  usuario_lanc  Int
+  data          DateTime  @db.Date
+  hora          DateTime  @db.Time(0)
+  hora_mensagem DateTime? @db.Time(0)
+  descricao     String?   @db.VarChar(255)
+  status        String?   @db.VarChar(20)
+  hash          String?   @db.VarChar(100)
+  prioridade    String?   @db.VarChar(25)
+
+  @@map("tarefas")
+}
+
+model Treatment {
+  id           Int       @id @default(autoincrement())
+  paciente     Int
+  procedimento Int
+  profissional Int
+  data_inicial DateTime  @db.Date
+  data_final   DateTime  @db.Date
+  frequencia   Int
+  hora1        DateTime? @db.Time(0)
+  hora2        DateTime? @db.Time(0)
+  hora3        DateTime? @db.Time(0)
+  hora4        DateTime? @db.Time(0)
+  hora5        DateTime? @db.Time(0)
+  hora6        DateTime? @db.Time(0)
+  quitado      String?   @db.VarChar(5)
+  data         DateTime? @db.Date
+
+  @@map("tratamentos")
+}
+
+model User {
+  id                Int       @id @default(autoincrement())
+  name              String    @map("nome") @db.VarChar(50)
+  email             String    @db.VarChar(50)
+  legacyPassword    String?   @map("senha") @db.VarChar(50)
+  passwordHash      String    @map("senha_crip") @db.VarChar(130)
+  role              String    @map("nivel") @db.VarChar(25)
+  active            String    @map("ativo") @db.VarChar(5)
+  telefone          String?   @db.VarChar(20)
+  endereco          String?   @db.VarChar(150)
+  foto              String?   @db.VarChar(100)
+  data              DateTime  @db.Date
+  comissao          Int?
+  id_ref            Int
+  pix               String?   @db.VarChar(100)
+  token             String?   @db.VarChar(150)
+  data_nasc         DateTime? @db.Date
+  numero            String?   @db.VarChar(10)
+  bairro            String?   @db.VarChar(50)
+  cidade            String?   @db.VarChar(50)
+  estado            String?   @db.VarChar(50)
+  cep               String?   @db.VarChar(20)
+  acessar_painel    String?   @db.VarChar(5)
+  cpf               String?   @db.VarChar(20)
+  mostrar_registros String?   @db.VarChar(5)
+  complemento       String?   @db.VarChar(100)
+  tipo_chave        String?   @db.VarChar(100)
+  atendimento       String?   @db.VarChar(5)
+  intervalo         Int?
+  cro               String?   @db.VarChar(20)
+
+  @@map("usuarios")
+}
+
+model UserPermission {
+  id        Int @id @default(autoincrement())
+  usuario   Int
+  permissao Int
+
+  @@map("usuarios_permissoes")
+}
